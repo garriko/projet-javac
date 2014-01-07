@@ -21,7 +21,7 @@ public class FileReader {
 
 			fis = new FileInputStream(file);
 			isr= new InputStreamReader(fis);
-			br=new BufferedReader(isr);
+			br= new BufferedReader(isr);
 
 			String readLine = null;
 
