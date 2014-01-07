@@ -21,7 +21,7 @@ public class RepositoryReaderImpl implements RepositoryReader{
 		for (int j=0; j < fl.length; j++)
 		{
 			str= fl[j].toString();
-			if(str.indexOf(".music")!=-1){
+			if( str.substring(str.lastIndexOf('.')).equals(".music")){
 				totalinfo= file.simpleReadFile(str);
 				out=out+totalinfo;
 			}
