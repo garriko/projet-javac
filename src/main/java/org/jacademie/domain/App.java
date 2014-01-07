@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
  * Hello world!
  *
  */
-public class App 
+public class App
 {
 	static Logger logger = Logger.getLogger(App.class);
 	

@@ -61,6 +61,7 @@ private static Logger logger = Logger.getLogger(LiveMain.class);
 		
 		session.getTransaction().commit();
 		session.close();
+		
 	}
 	
 }
