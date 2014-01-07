@@ -1,4 +1,4 @@
-package org.jacademie.domain;
+package org.jacademie.FileReader;
 
 import java.io.BufferedReader;
 import java.io.File;
