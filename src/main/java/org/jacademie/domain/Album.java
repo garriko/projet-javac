@@ -25,8 +25,19 @@ public class Album {
 	public void removeChanson(Chanson chanson){
 		this.chansons.remove(chanson);
 	}
-	
 
+	@Override
+	public String toString(){
+		String res = "Album " + this.nom + "\n";
+		res.concat("Code Album : " + this.codeAlbum + "\n\n");
+		
+		for(Chanson ch : this.chansons){
+			res.concat(ch.toString());
+		}
+		return res;
+	}
+	
+	
 	public Integer getCodeAlbum() {
 		return codeAlbum;
 	}

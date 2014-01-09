@@ -10,6 +10,14 @@ public class Chanson {
 		super();
 	}
 
+	@Override
+	public String toString(){
+		String res = "Chanson " + this.titre + "\n";
+		res.concat("Numero Chanson : " + this.numeroChanson + "\n\n");
+		res.concat("Duree Chanson : " + this.duree + "\n\n");
+		
+		return res;
+	}
 	
 	
 	public Integer getId() {

@@ -6,5 +6,5 @@ import java.util.HashMap;
 
 public interface RepositoryReader {
 	
-	public HashMap  simpleReadRepository(String filePath) throws FileNotFoundException, IOException;
+	public HashMap<String, String> simpleReadRepository(String filePath) throws FileNotFoundException, IOException;
 }

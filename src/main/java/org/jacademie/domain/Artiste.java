@@ -53,5 +53,15 @@ public class Artiste {
 		this.albums = albums;
 	}
 	
+	@Override
+	public String toString(){
+		String res = "Artiste " + this.nom + "\n";
+		res.concat("Code Artiste : " + this.codeArtiste + "\n\n");
+		
+		for(Album alb : this.albums){
+			res.concat(alb.toString());
+		}
+		return res;
+	}
 	
 }

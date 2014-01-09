@@ -8,12 +8,12 @@ import java.util.HashMap;
 public class RepositoryReaderImpl implements RepositoryReader{
 
 	@Override
-	public HashMap  simpleReadRepository(String filePath) throws FileNotFoundException, IOException{
+	public HashMap<String, String>  simpleReadRepository(String filePath) throws FileNotFoundException, IOException{
 
 		FileReader file= new FileReader();
 		File di = new File(filePath);
 		File fl[] = di.listFiles();
-		HashMap map = new HashMap();
+		HashMap<String, String> map = new HashMap<String, String>();
 
 
 		String str="";

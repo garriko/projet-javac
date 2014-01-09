@@ -10,7 +10,7 @@ import org.jacademie.domain.Chanson;
 
 
 public class ParserImpl implements Parser{
-	private static Logger logger = Logger.getLogger(TestParser.class);
+	private static Logger logger = Logger.getLogger(ParserImpl.class);
 
 
 
@@ -61,7 +61,7 @@ public class ParserImpl implements Parser{
 		int index = 0;
 		int cursor = ligne.indexOf(",",index);
 
-		logger.info(ligne);
+		//logger.info(ligne);
 		
 		Integer codeArtiste = Integer.parseInt(ligne.substring(index, cursor));
 
@@ -83,12 +83,12 @@ public class ParserImpl implements Parser{
 
 		index = cursor+2;
 		cursor = ligne.indexOf(",",index);
-		logger.debug("Titre chanson : " + ligne.substring(index, cursor));
+		//logger.debug("Titre chanson : " + ligne.substring(index, cursor));
 		String titreChanson = ligne.substring(index, cursor);
 
 		index = cursor+2;
 		//cursor = ligne.indexOf("\n",index);
-		logger.debug("duree chanson : " + ligne.substring(index));
+		//logger.debug("duree chanson : " + ligne.substring(index));
 		Integer dureeChanson = Integer.parseInt(ligne.substring(index));
 
 		inserer(liste,codeArtiste,nomArtiste,codeAlbum,nomAlbum,numeroChanson,titreChanson,dureeChanson);
