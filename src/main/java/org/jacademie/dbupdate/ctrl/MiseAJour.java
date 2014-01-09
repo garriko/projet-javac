@@ -30,7 +30,7 @@ public class MiseAJour {
 			String texte = entry.getValue();
 			logger.info("---------------------------------");
 			logger.info("Lecture de " + nomFichier);
-			
+			logger.info(texte);
 			Set<Artiste> contenuFichier = parser.parser(texte);
 			
 			

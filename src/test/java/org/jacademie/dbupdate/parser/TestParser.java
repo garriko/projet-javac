@@ -34,7 +34,7 @@ public class TestParser {
 	@Test
 	public void testFonctionParse(){
 		ParserImpl tester = new ParserImpl();
-		String chaine = "11, NomArtiste2, 124, NomAlbum2, 12, TitreChanson2, 350\n11, NomArtiste3, 10, NomAlbum3, 12, TitreChanson3, 364\n";
+		String chaine = "2, Green Day, 3, American Idiot, 1, American Idiot, 184\n2, Green Day, 3, American Idiot, 2, Holiday, 233\n2, Green Day, 3, American Idiot, 3, Boulevard of Broken Dreams, 261\n2, Green Day, 3, American Idiot, 4, Are We the Waiting, 175\n2, Green Day, 4, 21th Century Breakdown, 1, Song of the Century, 58\n2, Green Day, 4, 21th Century Breakdown, 2, 21th Century Breakdown, 309\n2, Green Day, 4, 21th Century Breakdown, 3, Know Your Enemy, 191\n";
 		Set<Artiste> res = tester.parser(chaine);
 		
 		logger.info("-----Affichage de la liste--------");
