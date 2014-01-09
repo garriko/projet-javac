@@ -35,22 +35,22 @@ public class ParserImpl implements Parser{
 
 		int fin = texte.indexOf("\n", index);
 
-		logger.debug(fin);
+		//logger.debug(fin);
 
 		while(fin != -1){
 			String ligne = texte.substring(index,fin);
 
 
-			logger.debug(ligne);
+			//logger.debug(ligne);
 
 			if(ligne!=null){
 				lignes.add(ligne);
 			}
 
 			index=fin+1;
-			logger.debug("index :" +index);
+			//logger.debug("index :" +index);
 			fin = texte.indexOf("\n", index);
-			logger.debug("fin :" +fin);
+			//logger.debug("fin :" +fin);
 		}
 
 		return lignes;
@@ -61,31 +61,35 @@ public class ParserImpl implements Parser{
 		int index = 0;
 		int cursor = ligne.indexOf(",",index);
 
-		Integer codeArtiste = Integer.valueOf(ligne.substring(index, cursor));
+		logger.info(ligne);
+		
+		Integer codeArtiste = Integer.parseInt(ligne.substring(index, cursor));
 
-		index = cursor+1;
+		index = cursor+2;
 		cursor = ligne.indexOf(",",index);
 		String nomArtiste = ligne.substring(index, cursor);
 
-		index = cursor+1;
+		index = cursor+2;
 		cursor = ligne.indexOf(",",index);
-		Integer codeAlbum = Integer.valueOf(ligne.substring(index, cursor));
+		Integer codeAlbum = Integer.parseInt(ligne.substring(index, cursor));
 
-		index = cursor+1;
+		index = cursor+2;
 		cursor = ligne.indexOf(",",index);
 		String nomAlbum = ligne.substring(index, cursor);
 
-		index = cursor+1;
+		index = cursor+2;
 		cursor = ligne.indexOf(",",index);
-		Integer numeroChanson = Integer.valueOf(ligne.substring(index, cursor));
+		Integer numeroChanson = Integer.parseInt(ligne.substring(index, cursor));
 
-		index = cursor+1;
+		index = cursor+2;
 		cursor = ligne.indexOf(",",index);
+		logger.debug("Titre chanson : " + ligne.substring(index, cursor));
 		String titreChanson = ligne.substring(index, cursor);
 
-		index = cursor+1;
-		cursor = ligne.indexOf(",",index);
-		Integer dureeChanson = Integer.valueOf(ligne.substring(index, cursor));
+		index = cursor+2;
+		//cursor = ligne.indexOf("\n",index);
+		logger.debug("duree chanson : " + ligne.substring(index));
+		Integer dureeChanson = Integer.parseInt(ligne.substring(index));
 
 		inserer(liste,codeArtiste,nomArtiste,codeAlbum,nomAlbum,numeroChanson,titreChanson,dureeChanson);
 
@@ -118,14 +122,45 @@ public class ParserImpl implements Parser{
 		}
 
 		else if(!albumExistant(liste, codeArtiste, codeAlbum)){
+			alb.addChanson(ch);
+			alb.setArtiste(art);
 
+			Artiste artiste = getArtiste(liste, codeArtiste);
+
+			artiste.addAlbum(alb);
+		}
+
+		else if(!chansonExistante(liste, codeArtiste, codeAlbum, numeroChanson)) {
+			Album album = getAlbum(liste, codeArtiste, codeAlbum);
+			
+			album.addChanson(ch);
+		}
+		
+		else {
+			logger.debug("Rien a mettre a jour");
 		}
 
 	}
 
-	private boolean albumExistant(Set<Artiste> liste, Integer codeArtiste, Integer codeAlbum) {
+
+	private boolean chansonExistante(Set<Artiste> liste, Integer codeArtiste,
+			Integer codeAlbum, Integer numeroChanson) {
+		Album album = getAlbum(liste, codeArtiste, codeAlbum);
+
+		Set<Chanson> chansons = album.getChansons();
+		boolean res=false;
+
+		for(Chanson c : chansons){
+			if(c.getNumeroChanson().equals(numeroChanson))
+				res=true;
+		}
+		return res;
+	}
+
+
+	public Artiste getArtiste(Set<Artiste> liste, Integer codeArtiste){
 		Artiste art = new Artiste();
-		
+
 		for(Artiste artiste : liste){
 			if(artiste.getCodeArtiste().equals(codeArtiste))
 			{
@@ -133,12 +168,38 @@ public class ParserImpl implements Parser{
 				break;
 			}
 		}
-			
+		return art;
+	}
+
+	public Album getAlbum(Set<Artiste> liste, Integer codeArtiste, Integer codeAlbum){
+		Artiste art = getArtiste(liste, codeArtiste);
+
 		Set<Album> albums = art.getAlbums();
-		
-		
-		
-		return false;
+		Album res = new Album();
+
+		for(Album a : albums){
+			if(a.getCodeAlbum().equals(codeAlbum))
+				res = a;
+			break;
+		}
+		return res;
+
+	}
+
+	//TODO : ecrire le unit test
+	private boolean albumExistant(Set<Artiste> liste, Integer codeArtiste, Integer codeAlbum) {
+
+		Artiste art = getArtiste(liste, codeArtiste);
+
+		Set<Album> albums = art.getAlbums();
+		boolean res=false;
+
+		for(Album a : albums){
+			if(a.getCodeAlbum().equals(codeAlbum))
+				res=true;
+		}
+		return res;
+
 	}
 
 
