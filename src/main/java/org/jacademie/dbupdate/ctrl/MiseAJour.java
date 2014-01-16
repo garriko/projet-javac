@@ -8,8 +8,12 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.jacademie.FileReader.RepositoryReader;
 import org.jacademie.FileReader.RepositoryReaderImpl;
+import org.jacademie.dbupdate.dao.ArtisteDAO;
 import org.jacademie.dbupdate.parser.Parser;
 import org.jacademie.dbupdate.parser.ParserImpl;
 import org.jacademie.domain.Album;
@@ -17,15 +21,15 @@ import org.jacademie.domain.Artiste;
 import org.jacademie.domain.Chanson;
 
 public class MiseAJour {
-	
+
 	private static Logger logger = Logger.getLogger(MiseAJour.class);
-	
+
 	public static void updateDepuisRepertoire(String cheminRepertoire) throws FileNotFoundException, IOException{
 		RepositoryReader repoReader = new RepositoryReaderImpl();
 		Parser parser = new ParserImpl();
-		
+
 		HashMap<String, String> map = repoReader.simpleReadRepository(cheminRepertoire);
-		
+
 		for(Entry<String, String> entry : map.entrySet()){
 			String nomFichier = entry.getKey();
 			String texte = entry.getValue();
@@ -33,34 +37,30 @@ public class MiseAJour {
 			logger.info("Lecture de " + nomFichier);
 			logger.info(texte);
 			List<Artiste> contenuFichier = parser.parser(texte);
-			
-			
-			logger.info("-----Affichage du contenu--------");
+
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+
+			Session session = sessionFactory.openSession();
+
+			ArtisteDAO artDAO = new ArtisteDAO();
+
+			//logger.info("-----Affichage du contenu--------");
 			for(Artiste artiste : contenuFichier){
-				logger.info("-----NOUVEL ARTISTE--------");
-				logger.debug("Artiste : " + artiste.getNom());
-				logger.debug("Code " + artiste.getCodeArtiste());
-				
-				for(Album album : artiste.getAlbums()){
-					logger.info("-----NOUVEL ALBUM--------");
-					logger.debug("Album : " + album.getNom());
-					logger.debug("Code album " + album.getCodeAlbum());
-					
-					for(Chanson chanson : album.getChansons()){
-						logger.debug("Titre : " + chanson.getTitre());
-						logger.debug("Numero " + chanson.getNumeroChanson());
-						logger.debug("Duree"+ chanson.getDuree());
-					}
-					
-				}
+				//artiste.toString();
+				session.beginTransaction();
+				artDAO.ajouterArtiste(artiste, session);
+				session.getTransaction().commit();
 				
 			}
-			logger.info("-----END--------");
+			//logger.info("-----END--------");
+			session.close();
 		}
+
+
 	}
-	
+
 	public void updateDepuisRepertoire(){
-		
+
 	}
-	
+
 }
