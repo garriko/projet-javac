@@ -47,9 +47,10 @@ public class RepositoryReaderImpl implements RepositoryReader{
 	 * @see org.jacademie.FileReader.RepositoryReader#createDirectory(java.io.File)
 	 */
 	@Override
-	public boolean createDirectory(File path) { 
+	public String createDirectory(String path) { 
 		
-		boolean resultat = true;
+		File path2 = new File(path);
+		String resultat = "";
 		String nomRep = new String();
 		Date actuelle = new Date();
 
@@ -57,9 +58,8 @@ public class RepositoryReaderImpl implements RepositoryReader{
 		String dat = dateFormat.format(actuelle);
 		
 		nomRep="/processed_"+dat;
-		System.out.println(path+nomRep);
 		File fb = new File(path+nomRep); 
-
+		resultat=path+nomRep;
 		fb.mkdirs();
 		return resultat;
 	} 
