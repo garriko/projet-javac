@@ -14,7 +14,8 @@ public class AlbumDAO {
 		else{
 			albumExistant.setArtiste(album.getArtiste());
 			albumExistant.setNom(album.getNom());
-			//albumExistant.setChansons(album.getChansons());
+			//albumExistant.addNewChansons(album.getChansons());
+			//albumExistant.removeChansons(album.getChansons());
 			session.update(albumExistant);
 		}
 	}

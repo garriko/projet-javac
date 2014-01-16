@@ -17,27 +17,46 @@ public class Album {
 		this.chansons = new HashSet<Chanson>();
 	}
 
-	
+
 	public void addChanson(Chanson chanson){
 		this.chansons.add(chanson);
 	}
-	
+
 	public void removeChanson(Chanson chanson){
 		this.chansons.remove(chanson);
 	}
+
+	public void removeChansons(Set<Chanson> chansons2) {
+		for(Chanson chanson : this.chansons){
+
+			if(!chansons2.contains(chanson)){
+				this.removeChanson(chanson);
+			}
+		}
+	}
+
+	public void addNewChansons(Set<Chanson> chansons) {
+		for(Chanson chanson : chansons){
+
+			if(!this.chansons.contains(chanson)){
+				this.chansons.add(chanson);
+			}
+		}
+	}
+
 
 	@Override
 	public String toString(){
 		String res = "Album " + this.nom + "\n";
 		res = res.concat("Code Album : " + this.codeAlbum + "\n\n");
-		
+
 		for(Chanson ch : this.chansons){
 			res = res.concat(ch.toString());
 		}
 		return res;
 	}
-	
-	
+
+
 	public Integer getCodeAlbum() {
 		return codeAlbum;
 	}
@@ -77,5 +96,8 @@ public class Album {
 		this.artiste = artiste;
 	}
 
+
 	
+
+
 }

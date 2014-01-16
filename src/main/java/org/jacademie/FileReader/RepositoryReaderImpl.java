@@ -41,7 +41,11 @@ public class RepositoryReaderImpl implements RepositoryReader{
 		return map;
 	}
 
-	
+	/*
+	 * Crée le dossier path/processed_YYYYMMDD_HHmmSS 
+	 * (non-Javadoc)
+	 * @see org.jacademie.FileReader.RepositoryReader#createDirectory(java.io.File)
+	 */
 	@Override
 	public boolean createDirectory(File path) { 
 		

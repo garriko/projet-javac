@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.jacademie.FileReader.FileReader;
 import org.jacademie.FileReader.RepositoryReader;
 import org.jacademie.FileReader.RepositoryReaderImpl;
 import org.jacademie.dbupdate.dao.ArtisteDAO;
@@ -30,6 +31,8 @@ public class MiseAJour {
 
 		HashMap<String, String> map = repoReader.simpleReadRepository(cheminRepertoire);
 
+		String newRepository = repoReader.createDirectory(cheminRepertoire);
+		
 		for(Entry<String, String> entry : map.entrySet()){
 			String nomFichier = entry.getKey();
 			String texte = entry.getValue();
@@ -54,6 +57,8 @@ public class MiseAJour {
 			}
 			//logger.info("-----END--------");
 			session.close();
+			
+			FileReader.MoveFile(cheminRepertoire+nomFichier, newRepository);
 		}
 
 
