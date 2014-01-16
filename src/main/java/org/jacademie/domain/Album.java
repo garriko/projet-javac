@@ -29,10 +29,10 @@ public class Album {
 	@Override
 	public String toString(){
 		String res = "Album " + this.nom + "\n";
-		res.concat("Code Album : " + this.codeAlbum + "\n\n");
+		res = res.concat("Code Album : " + this.codeAlbum + "\n\n");
 		
 		for(Chanson ch : this.chansons){
-			res.concat(ch.toString());
+			res = res.concat(ch.toString());
 		}
 		return res;
 	}

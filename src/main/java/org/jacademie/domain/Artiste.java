@@ -56,10 +56,10 @@ public class Artiste {
 	@Override
 	public String toString(){
 		String res = "Artiste " + this.nom + "\n";
-		res.concat("Code Artiste : " + this.codeArtiste + "\n\n");
+		res = res.concat("Code Artiste : " + this.codeArtiste + "\n\n");
 		
 		for(Album alb : this.albums){
-			res.concat(alb.toString());
+			res = res.concat(alb.toString());
 		}
 		return res;
 	}

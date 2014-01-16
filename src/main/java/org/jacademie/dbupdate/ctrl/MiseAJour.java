@@ -3,6 +3,7 @@ package org.jacademie.dbupdate.ctrl;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -31,7 +32,7 @@ public class MiseAJour {
 			logger.info("---------------------------------");
 			logger.info("Lecture de " + nomFichier);
 			logger.info(texte);
-			Set<Artiste> contenuFichier = parser.parser(texte);
+			List<Artiste> contenuFichier = parser.parser(texte);
 			
 			
 			logger.info("-----Affichage du contenu--------");

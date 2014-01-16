@@ -1,6 +1,7 @@
 package org.jacademie.dbupdate.parser;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -15,10 +16,10 @@ public class ParserImpl implements Parser{
 
 
 	@Override
-	public Set<Artiste> parser(String texte) {
-		Set<Artiste> resultat = new HashSet<>();	
+	public List<Artiste> parser(String texte) {
+		List<Artiste> resultat = new ArrayList<>();	
 
-		Set<String> lignes = decomposerLignes(texte);
+		List<String> lignes = decomposerLignes(texte);
 
 		for(String l : lignes){
 			majResultat(resultat, l);
@@ -28,8 +29,8 @@ public class ParserImpl implements Parser{
 	}
 
 
-	public Set<String> decomposerLignes(String texte){
-		Set<String> lignes = new HashSet<String>();
+	public List<String> decomposerLignes(String texte){
+		List<String> lignes = new ArrayList<String>();
 
 		int index = 0;
 
@@ -57,7 +58,7 @@ public class ParserImpl implements Parser{
 	}
 
 
-	public void majResultat(Set<Artiste> liste, String ligne){
+	public void majResultat(List<Artiste> liste, String ligne){
 		int index = 0;
 		int cursor = ligne.indexOf(",",index);
 
@@ -96,7 +97,7 @@ public class ParserImpl implements Parser{
 	}
 
 
-	private void inserer(Set<Artiste> liste, Integer codeArtiste,
+	private void inserer(List<Artiste> liste, Integer codeArtiste,
 			String nomArtiste, Integer codeAlbum, String nomAlbum,
 			Integer numeroChanson, String titreChanson, Integer dureeChanson) {
 
@@ -114,6 +115,7 @@ public class ParserImpl implements Parser{
 		art.setNom(nomArtiste);		
 
 		if(!artisteExistant(liste,codeArtiste)){
+			//logger.debug("nouvel artiste " + codeArtiste + " avec l'album "+ codeAlbum + " et la chanson " + numeroChanson);
 			alb.addChanson(ch);
 			alb.setArtiste(art);
 			art.addAlbum(alb);
@@ -122,6 +124,7 @@ public class ParserImpl implements Parser{
 		}
 
 		else if(!albumExistant(liste, codeArtiste, codeAlbum)){
+			//logger.debug("nouvel album " + codeAlbum + " pour l'artiste " + codeArtiste + " avec la chanson " + numeroChanson);
 			alb.addChanson(ch);
 			alb.setArtiste(art);
 
@@ -132,18 +135,18 @@ public class ParserImpl implements Parser{
 
 		else if(!chansonExistante(liste, codeArtiste, codeAlbum, numeroChanson)) {
 			Album album = getAlbum(liste, codeArtiste, codeAlbum);
-			
+			//logger.debug("nouvelle chanson " + numeroChanson + " dans l'album " + codeAlbum);
 			album.addChanson(ch);
 		}
 		
 		else {
 			logger.debug("Rien a mettre a jour");
 		}
-
+		//logger.debug(liste.get(0).toString());
 	}
 
 
-	private boolean chansonExistante(Set<Artiste> liste, Integer codeArtiste,
+	private boolean chansonExistante(List<Artiste> liste, Integer codeArtiste,
 			Integer codeAlbum, Integer numeroChanson) {
 		Album album = getAlbum(liste, codeArtiste, codeAlbum);
 
@@ -158,9 +161,9 @@ public class ParserImpl implements Parser{
 	}
 
 
-	public Artiste getArtiste(Set<Artiste> liste, Integer codeArtiste){
+	public Artiste getArtiste(List<Artiste> liste, Integer codeArtiste){
 		Artiste art = new Artiste();
-
+		
 		for(Artiste artiste : liste){
 			if(artiste.getCodeArtiste().equals(codeArtiste))
 			{
@@ -168,26 +171,31 @@ public class ParserImpl implements Parser{
 				break;
 			}
 		}
+		
 		return art;
 	}
 
-	public Album getAlbum(Set<Artiste> liste, Integer codeArtiste, Integer codeAlbum){
+	public Album getAlbum(List<Artiste> liste, Integer codeArtiste, Integer codeAlbum){
+		//logger.info("Dans getAlbum");
 		Artiste art = getArtiste(liste, codeArtiste);
-
+		//logger.debug(art.toString());
 		Set<Album> albums = art.getAlbums();
 		Album res = new Album();
-
+		//logger.info("Code album a trouver "+ codeAlbum);
 		for(Album a : albums){
+		//	logger.info("Code album liste "+ a.getCodeAlbum());
+			
 			if(a.getCodeAlbum().equals(codeAlbum))
 				res = a;
 			break;
 		}
+	//	logger.info("Album found "+ res.getNom());
 		return res;
 
 	}
 
 	//TODO : ecrire le unit test
-	private boolean albumExistant(Set<Artiste> liste, Integer codeArtiste, Integer codeAlbum) {
+	private boolean albumExistant(List<Artiste> liste, Integer codeArtiste, Integer codeAlbum) {
 
 		Artiste art = getArtiste(liste, codeArtiste);
 
@@ -204,7 +212,7 @@ public class ParserImpl implements Parser{
 
 
 	//TODO : ecrire le unit test
-	private boolean artisteExistant(Set<Artiste> liste, Integer codeArtiste) {
+	private boolean artisteExistant(List<Artiste> liste, Integer codeArtiste) {
 		boolean res=false;
 		for(Artiste arti : liste){
 			if(arti.getCodeArtiste().equals(codeArtiste))
