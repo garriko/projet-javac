@@ -89,4 +89,13 @@ public class FileReader {
 
 
 	}
+	
+	public static void MoveFile(String filePath, String fileDestination){
+
+	    File source = new File(filePath);
+	    File destination = new File(fileDestination);
+	    
+	    source.renameTo(destination);
+
+	}
 }

@@ -3,6 +3,9 @@ package org.jacademie.FileReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 public class RepositoryReaderImpl implements RepositoryReader{
@@ -24,10 +27,10 @@ public class RepositoryReaderImpl implements RepositoryReader{
 		for (int j=0; j < fl.length; j++)
 		{
 			str= fl[j].toString();
-			
+
 			str2= filePath.replace('/', '\\');
 			str2= str.replace(str2+"\\","");
-			
+
 			if( str.substring(str.lastIndexOf('.')).equals(".music")){
 				totalinfo= file.simpleReadFile(str);
 				out=out+totalinfo;
@@ -37,5 +40,23 @@ public class RepositoryReaderImpl implements RepositoryReader{
 
 		return map;
 	}
+
 	
+	@Override
+	public boolean createDirectory(File path) { 
+		
+		boolean resultat = true;
+		String nomRep = new String();
+		Date actuelle = new Date();
+
+		DateFormat dateFormat = new SimpleDateFormat("YYYY.MM.DD_HH.mm.SS");
+		String dat = dateFormat.format(actuelle);
+		
+		nomRep="/processed_"+dat;
+		System.out.println(path+nomRep);
+		File fb = new File(path+nomRep); 
+
+		fb.mkdirs();
+		return resultat;
+	} 
 }
