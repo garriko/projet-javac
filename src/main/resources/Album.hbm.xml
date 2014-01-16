@@ -13,7 +13,7 @@
 			<column name="NOM" length="80" not-null="true" />
 		</property>
 		
-		<set name="chansons" lazy="false" cascade="all,delete-orphan">
+		<set name="chansons" lazy="false" cascade="save-update">
 			<key column="ALBUM_ID" not-null="true"></key>
 			<one-to-many class="Chanson"/>
 		</set>

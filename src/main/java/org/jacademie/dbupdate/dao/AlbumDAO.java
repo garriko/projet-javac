@@ -6,8 +6,16 @@ import org.jacademie.domain.Artiste;
 
 public class AlbumDAO {
 	public void ajouterAlbum(Album album, Session session){
+		Album albumExistant = (Album) session.get(Album.class, album.getCodeAlbum());
 		
-		session.save(album);
-
+		if(albumExistant == null){
+			session.save(album);
+		}
+		else{
+			albumExistant.setArtiste(album.getArtiste());
+			albumExistant.setNom(album.getNom());
+			//albumExistant.setChansons(album.getChansons());
+			session.update(albumExistant);
+		}
 	}
 }
