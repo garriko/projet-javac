@@ -56,10 +56,7 @@ public class TestRepositoryReader {
 	@Test
 	public void TestCreateDirectory() throws FileNotFoundException, IOException{
 		RepositoryReader test= new RepositoryReaderImpl();
-		File fb = new File("C:/Users/adrien/Desktop/FI3/Java Academy/Maven/projet-javac/TestRepositoryReader");
-		System.out.println();
-		fb.mkdirs();
-		assertTrue(test.createDirectory(fb));
+		test.createDirectory("C:/Users/adrien/Desktop/FI3/Java Academy/Maven/projet-javac/TestRepositoryReader");
 	}
 	
 }

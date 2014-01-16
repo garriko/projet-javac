@@ -9,5 +9,5 @@ public interface RepositoryReader {
 	
 	public HashMap<String, String> simpleReadRepository(String filePath) throws FileNotFoundException, IOException;
 
-	boolean createDirectory(File path);
+	String createDirectory(String path);
 }
