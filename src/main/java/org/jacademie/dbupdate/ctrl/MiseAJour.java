@@ -57,8 +57,15 @@ public class MiseAJour {
 			}
 			//logger.info("-----END--------");
 			session.close();
+			logger.info("+++++++++++++++++++++++++++++++++++++++++");
+			logger.info("+++++++++++++++++++++++++++++++++++++++++");
+			logger.info("+++++++++++++++++++++++++++++++++++++++++");
+			logger.info("+++++++++++++++++++++++++++++++++++++++++");
+			logger.info("+++++++++++++++++++++++++++++++++++++++++");
+			logger.info(cheminRepertoire+"/"+nomFichier);
+			logger.info(newRepository);
 			
-			FileReader.MoveFile(cheminRepertoire+nomFichier, newRepository);
+			FileReader.MoveFile(cheminRepertoire+"/"+nomFichier, newRepository+"/"+nomFichier);
 		}
 
 
