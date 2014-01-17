@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import org.jacademie.domain.Album;
 import org.jacademie.domain.Artiste;
 import org.jacademie.domain.Chanson;
-import org.jacademie.projetjavac.LiveMain;
+
 import org.jacademie.service.parser.ParserImpl;
 import org.junit.Test;
 
