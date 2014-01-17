@@ -1,4 +1,4 @@
-package org.jacademie.dbupdate.parser;
+package org.jacademie.service.parser;
 
 import java.util.ArrayList;
 import java.util.List;

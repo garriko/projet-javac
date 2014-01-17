@@ -1,4 +1,4 @@
-package org.jacademie.FileReader;
+package org.jacademie.service.FileReader;
 
 import java.io.BufferedReader;
 import java.io.File;

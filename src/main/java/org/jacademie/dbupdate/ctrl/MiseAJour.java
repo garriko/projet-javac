@@ -11,15 +11,15 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.jacademie.FileReader.FileReader;
-import org.jacademie.FileReader.RepositoryReader;
-import org.jacademie.FileReader.RepositoryReaderImpl;
-import org.jacademie.dbupdate.dao.ArtisteDAO;
-import org.jacademie.dbupdate.parser.Parser;
-import org.jacademie.dbupdate.parser.ParserImpl;
+import org.jacademie.dao.ArtisteDAO;
 import org.jacademie.domain.Album;
 import org.jacademie.domain.Artiste;
 import org.jacademie.domain.Chanson;
+import org.jacademie.service.FileReader.FileReader;
+import org.jacademie.service.FileReader.RepositoryReader;
+import org.jacademie.service.FileReader.RepositoryReaderImpl;
+import org.jacademie.service.parser.Parser;
+import org.jacademie.service.parser.ParserImpl;
 
 public class MiseAJour {
 

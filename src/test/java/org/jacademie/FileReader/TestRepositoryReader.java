@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 
+import org.jacademie.service.FileReader.RepositoryReader;
+import org.jacademie.service.FileReader.RepositoryReaderImpl;
 import org.junit.Test;
 
 public class TestRepositoryReader {

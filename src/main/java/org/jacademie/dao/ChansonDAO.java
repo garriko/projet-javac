@@ -1,4 +1,4 @@
-package org.jacademie.dbupdate.dao;
+package org.jacademie.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
