@@ -1,4 +1,4 @@
-package org.jacademie.service.FileReader;
+package org.jacademie.service.filereader.impl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,6 +7,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+
+import org.jacademie.service.filereader.FileReader;
+import org.jacademie.service.filereader.RepositoryReader;
 
 public class RepositoryReaderImpl implements RepositoryReader{
 

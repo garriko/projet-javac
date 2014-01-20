@@ -15,23 +15,27 @@ import org.jacademie.dao.ArtisteDAO;
 import org.jacademie.domain.Album;
 import org.jacademie.domain.Artiste;
 import org.jacademie.domain.Chanson;
-import org.jacademie.service.FileReader.FileReader;
-import org.jacademie.service.FileReader.RepositoryReader;
-import org.jacademie.service.FileReader.RepositoryReaderImpl;
+import org.jacademie.service.filereader.FileReader;
+import org.jacademie.service.filereader.RepositoryReader;
+import org.jacademie.service.filereader.impl.RepositoryReaderImpl;
 import org.jacademie.service.parser.Parser;
-import org.jacademie.service.parser.ParserImpl;
+import org.jacademie.service.parser.impl.ParserImpl;
 
 public class MiseAJour {
 
 	private static Logger logger = Logger.getLogger(MiseAJour.class);
 
 	public static void updateDepuisRepertoire(String cheminRepertoire) throws FileNotFoundException, IOException{
+		
 		RepositoryReader repoReader = new RepositoryReaderImpl();
 		Parser parser = new ParserImpl();
 
 		HashMap<String, String> map = repoReader.simpleReadRepository(cheminRepertoire);
 
 		String newRepository = repoReader.createDirectory(cheminRepertoire);
+		
+
+
 		
 		for(Entry<String, String> entry : map.entrySet()){
 			String nomFichier = entry.getKey();
@@ -65,10 +69,10 @@ public class MiseAJour {
 			logger.info(cheminRepertoire+"/"+nomFichier);
 			logger.info(newRepository);
 			
-			FileReader.MoveFile(cheminRepertoire+"/"+nomFichier, newRepository+"/"+nomFichier);
+			//FileReader.MoveFile(cheminRepertoire+"/"+nomFichier, newRepository+"/"+nomFichier);
 		}
 
-
+		
 	}
 
 	public void updateDepuisRepertoire(){

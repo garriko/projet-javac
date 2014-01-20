@@ -9,7 +9,7 @@ import org.jacademie.domain.Album;
 import org.jacademie.domain.Artiste;
 import org.jacademie.domain.Chanson;
 
-import org.jacademie.service.parser.ParserImpl;
+import org.jacademie.service.parser.impl.ParserImpl;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

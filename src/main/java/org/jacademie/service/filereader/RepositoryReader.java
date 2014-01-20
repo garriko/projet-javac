@@ -1,4 +1,4 @@
-package org.jacademie.service.FileReader;
+package org.jacademie.service.filereader;
 
 import java.io.File;
 import java.io.FileNotFoundException;

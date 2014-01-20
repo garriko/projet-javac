@@ -1,4 +1,4 @@
-package org.jacademie.service.parser;
+package org.jacademie.service.parser.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.jacademie.domain.Album;
 import org.jacademie.domain.Artiste;
 import org.jacademie.domain.Chanson;
+import org.jacademie.service.parser.Parser;
 
 
 public class ParserImpl implements Parser{
