@@ -1,0 +1,10 @@
+org.jacademie.FileReader
+org.jacademie.dao
+org.jacademie.dbupdate.ctrl
+org.jacademie.dbupdate.parser.impl
+org.jacademie.domain
+org.jacademie.projetNoel
+org.jacademie.service.filereader
+org.jacademie.service.filereader.impl
+org.jacademie.service.parser
+org.jacademie.service.parser.impl

@@ -10,10 +10,18 @@ import org.jacademie.domain.Artiste;
 import org.jacademie.domain.Chanson;
 import org.jacademie.service.parser.Parser;
 
-
+/**
+ * <p>Classe permettant de parser les fichiers .music. </p>
+ * 
+ * <p>{@link #parser(String)} renvoie une liste d'{@link Artiste} contenant les {@link Album} et les {@link Chanson}</p>
+ * 
+ * @see Parser
+ * 
+ * @author Kevin Garrido
+ * 
+ */
 public class ParserImpl implements Parser{
 	private static Logger logger = Logger.getLogger(ParserImpl.class);
-
 
 
 	@Override
@@ -29,6 +37,12 @@ public class ParserImpl implements Parser{
 		return resultat;
 	}
 
+	/**
+	 * Décompose le String multilignes d'entree en plusieurs String correspondant chacun a une ligne
+	 * 
+	 * @param texte Texte multiligne que l'on veut decomposer
+	 * @return Renvoie une List de String. Chaque String est une ligne du String d'entree
+	 */
 
 	public List<String> decomposerLignes(String texte){
 		List<String> lignes = new ArrayList<String>();
@@ -64,7 +78,7 @@ public class ParserImpl implements Parser{
 		int cursor = ligne.indexOf(",",index);
 
 		//logger.info(ligne);
-		
+
 		Integer codeArtiste = Integer.parseInt(ligne.substring(index, cursor));
 
 		index = cursor+2;
@@ -139,7 +153,7 @@ public class ParserImpl implements Parser{
 			//logger.debug("nouvelle chanson " + numeroChanson + " dans l'album " + codeAlbum);
 			album.addChanson(ch);
 		}
-		
+
 		else {
 			logger.debug("Rien a mettre a jour");
 		}
@@ -147,6 +161,15 @@ public class ParserImpl implements Parser{
 	}
 
 
+	/**
+	 * Vérifie la presence d'une chanson dans la liste d'artistes
+	 * 
+	 * @param liste Liste d'artiste a verifier
+	 * @param codeArtiste code artiste a rechercher dans la liste
+	 * @param codeAlbum code album à rechercher dans la liste d'albums de l'artiste trouve
+	 * @param numeroChanson numero de la chanson dans l'album
+	 * @return true si la chanson est dans la liste, false sinon
+	 */
 	private boolean chansonExistante(List<Artiste> liste, Integer codeArtiste,
 			Integer codeAlbum, Integer numeroChanson) {
 		Album album = getAlbum(liste, codeArtiste, codeAlbum);
@@ -162,9 +185,17 @@ public class ParserImpl implements Parser{
 	}
 
 
+	/**
+	 * <p>Renvoie un artiste contenu dans une liste.</p>
+	 * <p>La fonction est toujours appelle apres {@link #artisteExistant(List, Integer)}, il y a donc toujours un artiste correspondant</p>
+	 * @param liste Liste d'artiste dans laquelle on veut recuperer un artiste précis
+	 * @param codeArtiste code de l'artiste
+	 * @return Renvoie l'artiste 
+	 */
+	
 	public Artiste getArtiste(List<Artiste> liste, Integer codeArtiste){
 		Artiste art = new Artiste();
-		
+
 		for(Artiste artiste : liste){
 			if(artiste.getCodeArtiste().equals(codeArtiste))
 			{
@@ -172,10 +203,19 @@ public class ParserImpl implements Parser{
 				break;
 			}
 		}
-		
+
 		return art;
 	}
 
+	/**
+	 * <p>Renvoie un album contenu dans une liste.</p>
+	 * <p>La fonction est toujours appelle apres {@link #albumExistant(List, Integer, Integer)}, il y a donc toujours un album correspondant</p>
+	 * @param liste Liste d'artiste dans laquelle on veut recuperer un album précis
+	 * @param codeArtiste code de l'artiste
+	 * @param codeAlbum code de l'album
+	 * @return Renvoie l'album 
+	 */
+	
 	public Album getAlbum(List<Artiste> liste, Integer codeArtiste, Integer codeAlbum){
 		//logger.info("Dans getAlbum");
 		Artiste art = getArtiste(liste, codeArtiste);
@@ -184,42 +224,66 @@ public class ParserImpl implements Parser{
 		Album res = new Album();
 		//logger.info("Code album a trouver "+ codeAlbum);
 		for(Album a : albums){
-		//	logger.info("Code album liste "+ a.getCodeAlbum());
-			
+			//	logger.info("Code album liste "+ a.getCodeAlbum());
+
 			if(a.getCodeAlbum().equals(codeAlbum))
 				res = a;
 			break;
 		}
-	//	logger.info("Album found "+ res.getNom());
+		//	logger.info("Album found "+ res.getNom());
 		return res;
 
 	}
-
-	//TODO : ecrire le unit test
-	private boolean albumExistant(List<Artiste> liste, Integer codeArtiste, Integer codeAlbum) {
-
-		Artiste art = getArtiste(liste, codeArtiste);
-
-		Set<Album> albums = art.getAlbums();
-		boolean res=false;
-
-		for(Album a : albums){
-			if(a.getCodeAlbum().equals(codeAlbum))
-				res=true;
+	
+	
+	/**
+	 * Vérifie la présence d'un album dans la liste d'artistes
+	 * 
+	 * @param liste Liste d'artiste a verifier
+	 * @param codeArtiste code artiste a rechercher dans la liste
+	 * @param codeAlbum code album a rechercher dans la liste d'albums de l'artiste trouve
+	 * @return true si l'album et l'artiste correspondant au code est dans la liste, false sinon
+	 */
+	public boolean albumExistant(List<Artiste> liste, Integer codeArtiste, Integer codeAlbum) {
+		if(liste == null || liste.isEmpty()){
+			return false;
 		}
-		return res;
+		else
+		{
+			Artiste art = getArtiste(liste, codeArtiste);
 
+			Set<Album> albums = art.getAlbums();
+			boolean res=false;
+
+			for(Album a : albums){
+				if(a.getCodeAlbum().equals(codeAlbum))
+					res=true;
+			}
+			return res;
+		}
 	}
 
 
-	//TODO : ecrire le unit test
-	private boolean artisteExistant(List<Artiste> liste, Integer codeArtiste) {
-		boolean res=false;
-		for(Artiste arti : liste){
-			if(arti.getCodeArtiste().equals(codeArtiste))
-				res=true;
+	/**
+	 * Verifie la presence d'un artiste dans la liste
+	 * 
+	 * @param liste Liste d'artiste a verifier
+	 * @param codeArtiste code artiste à rechercher dans la liste
+	 * @return true si l'artiste correspondant au code est dans la liste, false sinon
+	 */
+	public boolean artisteExistant(List<Artiste> liste, Integer codeArtiste) {
+		if(liste == null || liste.isEmpty()){
+			return false;
 		}
-		return res;
+		else
+		{
+			boolean res=false;
+			for(Artiste arti : liste){
+				if(arti.getCodeArtiste().equals(codeArtiste))
+					res=true;
+			}
+			return res;
+		}
 	}
 
 }
