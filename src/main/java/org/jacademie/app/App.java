@@ -14,7 +14,7 @@ public class App
 	public static void main( String[] args )
     {
 		//Repertoire dans lequel on recherche les fichiers .music
-		String repertoire = "C:/Users/Kevin/Documents/JAVA_ACADEMIE/workspace/projet-javac/TestRepositoryReader/Playlist";
+		String repertoire = "C:/Users/Kevin/Documents/JAVA_ACADEMIE/workspace/projet-javac/Playlist";
 		
 		try {
 			MiseAJour.updateDepuisRepertoire(repertoire);
