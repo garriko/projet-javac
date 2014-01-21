@@ -1,5 +1,22 @@
 package org.jacademie.service.filereader.impl;
 
+import org.jacademie.domain.Album;
+import org.jacademie.domain.Artiste;
+import org.jacademie.domain.Chanson;
+import org.jacademie.service.parser.Parser;
+
+
+/**
+ * <p>Classe permettant de lire le dossier contenant les fichiers .music. </p>
+ * 
+ * <p>{@link #repositoryReader)} renvoie un string contenant les informations contenues dans un fichier .music  et permet de creer un dossier</p>
+ * 
+ * @see RepositoryReader
+ * 
+ * @author Adrien Blachere
+ * 
+ * **/
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,6 +30,11 @@ import org.jacademie.service.filereader.RepositoryReader;
 
 public class RepositoryReaderImpl implements RepositoryReader{
 
+	/**
+	 * 
+	 * @param le chemin du dossier
+	 * @return Renvoie une Hashmap avec comme clef le nom du fichier et comme value le contenu du fichier
+	 */
 	@Override
 	public HashMap<String, String>  simpleReadRepository(String filePath) throws FileNotFoundException, IOException{
 
@@ -44,10 +66,10 @@ public class RepositoryReaderImpl implements RepositoryReader{
 		return map;
 	}
 
-	/*
-	 * Crée le dossier path/processed_YYYYMMDD_HHmmSS 
-	 * (non-Javadoc)
-	 * @see org.jacademie.FileReader.RepositoryReader#createDirectory(java.io.File)
+	/**
+	 * 
+	 * @param le chemin ou l'on veut créer le dossier
+	 * @return crée un dossier et renvoi le chemin d'entrée + le nom du fichier créé.
 	 */
 	@Override
 	public String createDirectory(String path) { 

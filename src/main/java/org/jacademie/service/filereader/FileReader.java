@@ -5,9 +5,25 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
 import org.apache.commons.io.FileUtils;
 
+/**
+ * <p>Classe permettant de lire le fichier </p>
+ * 
+ * @see FileReader
+ * 
+ * @author Remy Girodon // modif Adrien Blachere
+ * 
+ * **/
+
 public class FileReader {
+	
+	/**
+	 * @param le chemin du fichier
+	 * @return Le contenu du fichier
+	  */
+	
 	public static String  simpleReadFile(String filePath){
 		FileInputStream fis=null;
 
@@ -69,6 +85,10 @@ public class FileReader {
 		}
 	}
 
+	/**
+	 * @param le chemin du fichier (on utilise la bibliothèque FileUtils
+	 * @return Le contenu du fichier
+	  */
 	public static String advancedReadFile(String filePath){
 
 		try {
@@ -90,6 +110,10 @@ public class FileReader {
 
 	}
 	
+	/**
+	 * @param le chemin du fichier ainsi que le chemin de destination
+	 * @return bouge le fichier de place
+	  */
 	public static void MoveFile(String filePath, String fileDestination){
 
 	    File source = new File(filePath);
