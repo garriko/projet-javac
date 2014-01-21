@@ -1,4 +1,5 @@
 org.jacademie.FileReader
+org.jacademie.app
 org.jacademie.dao
 org.jacademie.dbupdate.ctrl
 org.jacademie.dbupdate.parser.impl

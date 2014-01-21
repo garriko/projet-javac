@@ -17,22 +17,40 @@ import org.jacademie.service.filereader.impl.RepositoryReaderImpl;
 import org.jacademie.service.parser.Parser;
 import org.jacademie.service.parser.impl.ParserImpl;
 
+
+/**
+ * Classe controlant toute la logique metier
+ * 
+ * @author Kevin
+ *
+ */
 public class MiseAJour {
 
 	private static Logger logger = Logger.getLogger(MiseAJour.class);
-
+	
+	
+	/**
+	 * <p>Cette fonction recupere les fichiers .music se trouvant dans le repertoire passe en parametre. Si ce repertoire est incorrect, la fonction renvoie une exception.</p>
+	 * 
+	 * <p>Elle appelle ensuite le parser sur chaque fichiers pour ensuite sauvegarder les nouveaux artistes dans la base de donnees</p>
+	 * <p>Les fichiers sont ensuite deplaces vers le repertoire /processed_AAAA.MM.JJ_HH.mm.ss. Par defaut, ce repertoire se trouve dans le repertoire donne en parametre.</p>
+	 * 
+	 * @param cheminRepertoire Chemin vers le repertoire a traiter
+	 * @throws FileNotFoundException Fichier non trouve
+	 * @throws IOException
+	 */
 	public static void updateDepuisRepertoire(String cheminRepertoire) throws FileNotFoundException, IOException{
-		
+
 		RepositoryReader repoReader = new RepositoryReaderImpl();
 		Parser parser = new ParserImpl();
 
 		HashMap<String, String> map = repoReader.simpleReadRepository(cheminRepertoire);
 
 		String newRepository = repoReader.createDirectory(cheminRepertoire);
-		
 
 
-		
+
+
 		for(Entry<String, String> entry : map.entrySet()){
 			String nomFichier = entry.getKey();
 			String texte = entry.getValue();
@@ -53,7 +71,7 @@ public class MiseAJour {
 				session.beginTransaction();
 				artDAO.ajouterArtiste(artiste, session);
 				session.getTransaction().commit();
-				
+
 			}
 			//logger.info("-----END--------");
 			session.close();
@@ -64,11 +82,11 @@ public class MiseAJour {
 			logger.info("+++++++++++++++++++++++++++++++++++++++++");
 			logger.info(cheminRepertoire+"/"+nomFichier);
 			logger.info(newRepository);
-			
+
 			//FileReader.MoveFile(cheminRepertoire+"/"+nomFichier, newRepository+"/"+nomFichier);
 		}
 
-		
+
 	}
 
 	public void updateDepuisRepertoire(){
