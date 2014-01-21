@@ -1,6 +1,5 @@
 package org.jacademie.service.filereader;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;

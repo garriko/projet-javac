@@ -1,5 +1,12 @@
 package org.jacademie.domain;
 
+/**
+ * 
+ * Objet Chanson
+ * 
+ * @author Kevin Garrido
+ * @see Artiste, Album
+ */
 public class Chanson {
 	private Integer id;
 	private Integer numeroChanson;

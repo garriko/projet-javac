@@ -162,7 +162,7 @@ public class ParserImpl implements Parser{
 
 
 	/**
-	 * Vérifie la presence d'une chanson dans la liste d'artistes
+	 * Verifie la presence d'une chanson dans la liste d'artistes
 	 * 
 	 * @param liste Liste d'artiste a verifier
 	 * @param codeArtiste code artiste a rechercher dans la liste
@@ -237,7 +237,7 @@ public class ParserImpl implements Parser{
 	
 	
 	/**
-	 * Vérifie la présence d'un album dans la liste d'artistes
+	 * Verifie la presence d'un album dans la liste d'artistes
 	 * 
 	 * @param liste Liste d'artiste a verifier
 	 * @param codeArtiste code artiste a rechercher dans la liste

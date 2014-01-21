@@ -3,6 +3,13 @@ package org.jacademie.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 
+ * Objet Album
+ * 
+ * @author Kevin Garrido
+ * @see Artiste, Chanson
+ */
 public class Album {
 
 	private Integer codeAlbum;

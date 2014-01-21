@@ -5,17 +5,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.jacademie.dao.ArtisteDAO;
-import org.jacademie.domain.Album;
 import org.jacademie.domain.Artiste;
-import org.jacademie.domain.Chanson;
-import org.jacademie.service.filereader.FileReader;
 import org.jacademie.service.filereader.RepositoryReader;
 import org.jacademie.service.filereader.impl.RepositoryReaderImpl;
 import org.jacademie.service.parser.Parser;
